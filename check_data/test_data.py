@@ -110,8 +110,11 @@ def test_kolmogorov_smirnov(data, ks_alpha):
     alpha_prime = 1 - (1 - ks_alpha)**(1 / len(columns))
 
     for col in columns:
-
-        ts, p_value = scipy.stats.ks_2samp(sample1[col], sample2[col])
+        
+        sample1_clean = sample1[col].dropna()
+        sample2_clean = sample2[col].dropna()
+        
+        ts, p_value = scipy.stats.ks_2samp(sample1_clean sample2_clean)
 
         # NOTE: as always, the p-value should be interpreted as the probability of
         # obtaining a test statistic (TS) equal or more extreme that the one we got
